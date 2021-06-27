@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:payflow/shared/themes/app_colors.dart';
+
+import 'app_colors.dart';
 
 class TextStyles {
   static final titleHome = GoogleFonts.lexendDeca(
@@ -16,6 +17,11 @@ class TextStyles {
   static final titleBoldHeading = GoogleFonts.lexendDeca(
     fontSize: 20,
     fontWeight: FontWeight.w600,
+    color: AppColors.heading,
+  );
+  static final titleBody = GoogleFonts.lexendDeca(
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
     color: AppColors.heading,
   );
   static final titleBoldBackground = GoogleFonts.lexendDeca(
@@ -67,6 +73,11 @@ class TextStyles {
     fontSize: 15,
     fontWeight: FontWeight.w700,
     color: AppColors.heading,
+  );
+  static final input = GoogleFonts.inter(
+    fontSize: 15,
+    fontWeight: FontWeight.w400,
+    color: AppColors.input,
   );
   static final buttonBoldGray = GoogleFonts.inter(
     fontSize: 15,

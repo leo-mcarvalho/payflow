@@ -3,20 +3,18 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_ml_kit/google_ml_kit.dart';
 import 'package:image_picker/image_picker.dart';
-import 'barcode_scanner_status.dart';
+import 'package:pay_flow/modules/barcode_scanner/barcode_scanner_status.dart';
 
-class BarcodeScannerController {
+class BarCodeScannerController {
   final statusNotifier =
-      ValueNotifier<BarcodeScannerStatus>(BarcodeScannerStatus());
-  BarcodeScannerStatus get status => statusNotifier.value;
-  set status(BarcodeScannerStatus status) => statusNotifier.value = status;
+      ValueNotifier<BarCodeScannerStatus>(BarCodeScannerStatus());
+  BarCodeScannerStatus get status => statusNotifier.value;
+  set status(BarCodeScannerStatus status) => statusNotifier.value = status;
 
   final barcodeScanner = GoogleMlKit.vision.barcodeScanner();
   CameraController? cameraController;
 
-  InputImage? imagePicker;
-
-  void getAvailableCameras() async {
+  void getAvailableCamera() async {
     try {
       final response = await availableCameras();
       final camera = response.firstWhere(
@@ -27,29 +25,16 @@ class BarcodeScannerController {
       scanWithCamera();
       listenCamera();
     } catch (e) {
-      status = BarcodeScannerStatus.error(e.toString());
+      status = BarCodeScannerStatus.error(e.toString());
     }
   }
 
-  Future<void> scannerBarCode(InputImage inputImage) async {
-    try {
-      final barcodes = await barcodeScanner.processImage(inputImage);
-
-      var barcode;
-      for (Barcode item in barcodes) {
-        barcode = item.value.displayValue;
-      }
-
-      if (barcode != null && status.barcode.isEmpty) {
-        status = BarcodeScannerStatus.barcode(barcode);
-        cameraController!.dispose();
-        await barcodeScanner.close();
-      }
-
-      return;
-    } catch (e) {
-      print("ERRO DA LEITURA $e");
-    }
+  void scanWithCamera() {
+    status = BarCodeScannerStatus.available();
+    Future.delayed(Duration(seconds: 20)).then((value) {
+      if (status.hasBarCode == false)
+        status = BarCodeScannerStatus.error("Timeout de leitura de boleto");
+    });
   }
 
   void scanWithImagePicker() async {
@@ -58,24 +43,30 @@ class BarcodeScannerController {
     scannerBarCode(inputImage);
   }
 
-  void scanWithCamera() {
-    status = BarcodeScannerStatus.available();
-    Future.delayed(Duration(seconds: 20)).then((value) {
-      if (status.hasBarcode == false)
-        status = BarcodeScannerStatus.error("Timeout de leitura de boleto");
-    });
+  Future<void> scannerBarCode(InputImage inputImage) async {
+    try {
+      final barcodes = await barcodeScanner.processImage(inputImage);
+      var barcode;
+      for (Barcode item in barcodes) {
+        barcode = item.value.displayValue;
+      }
+      if (barcode != null && status.barcode.isEmpty) {
+        status = BarCodeScannerStatus.barcode(barcode);
+        cameraController!.dispose();
+        await barcodeScanner.close();
+      }
+      return;
+    } catch (e) {
+      print("ERRO DA LEITURA $e");
+    }
   }
 
   void listenCamera() {
     if (cameraController!.value.isStreamingImages == false)
       cameraController!.startImageStream((cameraImage) async {
-        if (status.stopScanner == false) {
+        if (status.stopScanner == false)
           try {
-            final WriteBuffer allBytes = WriteBuffer();
-            for (Plane plane in cameraImage.planes) {
-              allBytes.putUint8List(plane.bytes);
-            }
-            final bytes = allBytes.done().buffer.asUint8List();
+            final bytes = cameraImage.planes[0].bytes;
             final Size imageSize = Size(
                 cameraImage.width.toDouble(), cameraImage.height.toDouble());
             final InputImageRotation imageRotation =
@@ -105,7 +96,6 @@ class BarcodeScannerController {
           } catch (e) {
             print(e);
           }
-        }
       });
   }
 
