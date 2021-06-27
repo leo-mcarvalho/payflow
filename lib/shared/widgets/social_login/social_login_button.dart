@@ -14,10 +14,13 @@ class SocialLoginButton extends StatelessWidget {
       child: Container(
         height: 56,
         decoration: BoxDecoration(
-          color: AppColors.shape,
-          borderRadius: BorderRadius.circular(5),
-          border: Border.fromBorderSide(BorderSide(color: AppColors.stroke)),
-        ),
+            color: AppColors.shape,
+            borderRadius: BorderRadius.circular(5),
+            border: Border.fromBorderSide(
+              BorderSide(
+                color: AppColors.stroke,
+              ),
+            )),
         child: Row(
           children: [
             Expanded(
@@ -38,13 +41,15 @@ class SocialLoginButton extends StatelessWidget {
                 )),
             Expanded(
               flex: 4,
-              child:
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Text(
-                  "Entrar com Google",
-                  style: TextStyles.buttonGray,
-                ),
-              ]),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Entrar com Google",
+                    style: TextStyles.buttonGray,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

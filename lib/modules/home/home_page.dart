@@ -7,12 +7,17 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   final controller = HomeController();
-  final pages = [Container(color: Colors.red), Container(color: Colors.blue)];
+  final pages = [
+    Container(
+      color: Colors.red,
+    ),
+    Container(color: Colors.blue),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,15 +28,16 @@ class _HomePageState extends State<HomePage> {
           color: AppColors.primary,
           child: Center(
             child: ListTile(
-              title: Text.rich(TextSpan(
-                  text: "Olá,",
-                  style: TextStyles.titleRegular,
-                  children: [
-                    TextSpan(
-                      text: " Leonardo!",
-                      style: TextStyles.titleBoldBackground,
-                    )
-                  ])),
+              title: Text.rich(
+                TextSpan(
+                    text: "Olá, ",
+                    style: TextStyles.titleRegular,
+                    children: [
+                      TextSpan(
+                          text: "Leonardo",
+                          style: TextStyles.titleBoldBackground)
+                    ]),
+              ),
               subtitle: Text(
                 "Mantenha suas contas em dia",
                 style: TextStyles.captionShape,
@@ -40,9 +46,8 @@ class _HomePageState extends State<HomePage> {
                 height: 48,
                 width: 48,
                 decoration: BoxDecoration(
-                  color: Colors.black,
-                  borderRadius: BorderRadius.circular(30),
-                ),
+                    color: Colors.black,
+                    borderRadius: BorderRadius.circular(5)),
               ),
             ),
           ),
@@ -65,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                 )),
             GestureDetector(
               onTap: () {
-                Navigator.pushNamed(context, "/barcode");
+                Navigator.pushNamed(context, "/barcode_scanner");
               },
               child: Container(
                 width: 56,
@@ -87,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(
                   Icons.description_outlined,
                   color: AppColors.body,
-                )),
+                ))
           ],
         ),
       ),
