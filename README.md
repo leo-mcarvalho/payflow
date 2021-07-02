@@ -1,16 +1,31 @@
-# payflow
+<h1 align="center">Pay Flow</h1>
+<div align="center">
+<img  src="https://i.imgur.com/BCMLr4H.png"></img></div>
 
-A new Flutter project.
+<h2 align="center">Sobre</h2>
 
-## Getting Started
+<p >
+   O Payflow foi desenvolvido durante a Next Level Week Together - O evento proporciona uma intensa semana de estudos e muito aprendizado. Ela foi brilhantemente organizada pela Rocketseat e ocorreu do dia 20 ao dia 27 de Junho.<br>
+   Essa aplicação é um Gerenciador de Boletos, onde você pode escanear seus boletos ou capturar o código de barras de uma imagem do seu celular, e usar o aplicativo para fazer o controle deles. <br>
+</p>
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<h2 align="center">Preview </h2>
+
+
+
+   > * O aplicativo ainda está em desenvolvimento...
+  
+<img src="https://i.imgur.com/DNWSmW0.png"></img>
+
+
+
+
+
+   <p align="center">
+      O Layout foi desenvolvido por <a href="https://instagram.com/tiagoluchtenberg">Tiago Luchtenberg</a>, e você pode acessá-lo no Figma:
+     </p>
+   <div align="center"><a align="center" href="https://www.figma.com/file/kLK7FYnWKMoN68sQXcSniu/PayFlow">Figma da aplicação</a></div>
+ 
